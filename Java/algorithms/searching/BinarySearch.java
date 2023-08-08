@@ -1,6 +1,5 @@
-package algorithmsJava.searching;
-
-public class binarySearch {
+package Java.algorithms.searching;
+public class BinarySearch {
 
     public static void main(String[] args) {
         int[] arr = {2,3,5,7,9,12,15};
@@ -40,7 +39,7 @@ public class binarySearch {
             }
 
             if(arr[mid] > target){
-              return recursiveSearch(arr, target, start, mid-1);
+                return recursiveSearch(arr, target, start, mid-1);
             }
             else return recursiveSearch(arr, target, mid+1, end);
         }
@@ -48,3 +47,4 @@ public class binarySearch {
         return -1;
     }
 }
+
