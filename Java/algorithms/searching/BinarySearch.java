@@ -3,7 +3,7 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         int[] arr = {2,3,5,7,9,12,15};
-        int target = 2;
+        int target = 4;
 //        int result = search(arr, target);
         int result = recursiveSearch(arr, target,0 , arr.length-1);
         if(result == -1) System.out.println("Number is not found in the array");
@@ -31,7 +31,7 @@ public class BinarySearch {
     //Using recursion
     public static int recursiveSearch(int[] arr, int target, int start, int end){
 
-        while (start <= end){
+        if(start <= end){
             int mid = start + ((end - start)/2);
 
             if(arr[mid] == target){
