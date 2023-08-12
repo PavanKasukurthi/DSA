@@ -22,7 +22,7 @@ public class AveragePair {
         int end = arr.length - 1;
 
         while(start <= end){
-            double calc = ( arr[start] + arr[end] )/2.0;
+            double calc = ( arr[start] + arr[end] )/2.00;
             if(calc == average) return true;
             else if(calc > average) end -= 1;
             else if(calc < average) start += 1;
