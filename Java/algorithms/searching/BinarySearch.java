@@ -9,6 +9,8 @@ public class BinarySearch {
         if(result == -1) System.out.println("Number is not found in the array");
         else System.out.println("Number is present at " + result + " index" );
     }
+
+    //iterative approach
     public static int search(int[] arr, int target){
         int start = 0;
         int end = arr.length - 1;
