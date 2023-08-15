@@ -16,7 +16,7 @@ public class CapitalizeFirst {
 
         if(!arr[index].isEmpty()){
             String currentString = Character.toUpperCase(arr[index].charAt(0)) 
-            + arr[index].substring(1);
+                                            + arr[index].substring(1);
 
             arr[index] = currentString;
         }
