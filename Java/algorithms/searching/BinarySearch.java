@@ -1,5 +1,8 @@
 package Java.algorithms.searching;
 
+//Worst and average case: O(log n)
+//Best case: O(1)
+
 public class BinarySearch {
 
     public static void main(String[] args) {

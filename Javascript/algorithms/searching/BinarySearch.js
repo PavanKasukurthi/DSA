@@ -1,3 +1,6 @@
+//Worst and average case: O(log n)
+//Best case: O(1)
+
 const BinarySearch = (arr, target) => {
   let start = 0
   let end = arr.length - 1
