@@ -1,8 +1,9 @@
 package Java.leetcode.easy;
 
+//GOOGLE QUESTION
 public class HappyNumber {
     public static void main(String[] args) {
-        System.out.println(happyNumber(4));
+        System.out.println(isHappy(18));
 
     }
 
@@ -27,5 +28,36 @@ public class HappyNumber {
 
         System.out.println(sum);
         return happyNumber(sum);
+    }
+
+    //LINKEDLIST APPROACH
+    public static boolean isHappy(int n){
+
+        int slow = n;
+        int fast = n;
+
+        findSquare(n);
+
+        do{
+            slow = findSquare(slow);
+            fast = findSquare((findSquare(fast)));
+        }
+        while(fast != slow);
+
+        if(slow == 1){
+            return true;
+        }
+
+        return false;
+    }
+
+    private static int findSquare(int number){
+        int ans = 0;
+        while(number > 0){
+            int rem = number % 10;
+            ans += rem * rem;
+            number = number / 10;
+        }
+        return ans;
     }
 }
