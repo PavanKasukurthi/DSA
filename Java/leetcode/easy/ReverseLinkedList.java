@@ -2,7 +2,6 @@ package Java.leetcode.easy;
 
 public class ReverseLinkedList {
    
-
         private Node head;
         private Node tail;
         private int size;
