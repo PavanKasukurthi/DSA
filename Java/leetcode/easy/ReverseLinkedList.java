@@ -26,13 +26,13 @@ public class ReverseLinkedList {
     }
 
     //USING RECURSION
-    private void reverse(Node node){
+    private void reverseRecursive(Node node){
        if(node == tail){
             head = tail;
             return;
        }
 
-       reverse(node.next);
+       reverseRecursive(node.next);
 
        tail.next = node;
        tail = node;
