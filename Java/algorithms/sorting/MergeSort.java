@@ -45,7 +45,7 @@ public class MergeSort {
             k++;
         }
 
-         while(j < first.length){
+         while(j < second.length){
             mix[k] = second[j];
             j++;
             k++;
