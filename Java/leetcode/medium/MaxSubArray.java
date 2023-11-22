@@ -7,6 +7,7 @@ public class MaxSubArray {
        System.out.println(maxSubArraySum(nums));
     }
 
+    //KADANE'S ALGORITHM
     public static int maxSubArraySum(int[] arr){
         int maxSum = arr[0];
         int currSum = maxSum;
