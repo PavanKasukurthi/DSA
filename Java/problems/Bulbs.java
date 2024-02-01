@@ -23,7 +23,7 @@ public class Bulbs {
         for(int bulb : bulbs){
             boolean isFlippedEvenTimes = cost%2 == 0;
 
-            boolean isSwitchRequired = (bulb == 0 && isFlippedEvenTimes || bulb == 0 && !isFlippedEvenTimes);
+            boolean isSwitchRequired = (bulb == 0 && isFlippedEvenTimes || bulb == 1 && !isFlippedEvenTimes);
 
             if(isSwitchRequired) cost++;
         }
