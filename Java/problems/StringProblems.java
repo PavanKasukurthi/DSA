@@ -1,10 +1,14 @@
 package Java.problems;
+import java.util.*;
 
 public class StringProblems {
     public static void main(String[] args) {
         // System.out.println(reverseString2("ReverseThisString"));
         // System.out.println(reverseWordsInAString("Reverse this string"));
         // System.out.println(checkRotation("aab", "aba"));
+        //System.out.println(nonRepeatingChar("geekforgeeks"));
+        String[] strs = {"flower","flow","flight"};
+        System.out.println(longestCommonPrefix(strs));
     }
 
     /* REVERSE A STRING */
@@ -50,4 +54,53 @@ public class StringProblems {
         return s1.contains(s2) ? true : false;
     }
 
+    /* FIRST NON-REPEATING CHARACTER */
+    public static char nonRepeatingChar(String str){
+        HashMap<Character, Integer> freqCounter = new HashMap<>();
+
+        for(char ch : str.toLowerCase().toCharArray()){
+            freqCounter.merge(ch, 1, Integer::sum);
+        }
+
+        for(int i = 0 ; i < str.length() ; i++){
+            if(freqCounter.get(str.charAt(i)) == 1) return str.charAt(i);
+        }
+
+        return '$';
+    }
+
+    /* LONGEST COMMON PREFIX */
+    public static String longestCommonPrefix(String[] arr){
+        Arrays.sort(arr);
+        int count = 0;
+        String start = arr[0];
+        String end = arr[arr.length - 1];
+
+        for(int i = 0 ; i < start.length() ; i++){
+            if(start.charAt(i) == end.charAt(i)) count++;
+            else break;
+        }
+
+        return start.substring(0, count);
+    }
+
+    /* ISOMORPHIC STRINGS */
+    public static boolean isomorphicStrings(String s1, String s2){
+        if(s1.length() != s2.length()) return false;
+
+        HashMap<Character, Character> hm = new HashMap();
+
+        for(int i = 0 ; i < s1.length() ; i++){
+            char charS1 = s1.charAt(i);
+            char charS2 = s2.charAt(i);
+            if(hm.containsKey(charS1)){
+                if(hm.get(charS1) != charS2) return false;
+            }
+            else {
+                if(hm.containsValue(charS2)) return false;
+                hm.put(charS1, charS2);
+            }
+        }
+        return true;
+    }
 }
