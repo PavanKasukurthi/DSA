@@ -1,8 +1,7 @@
 package Java.problems;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,9 +9,11 @@ public class ArrayProblems {
     
     public static void main(String[] args) {
         int[] a = { 3, 9, 2, 3, 1, 7, 2, 3, 5 }; 
+        int[] nums = {5, 5, 4, 6, 4};
         int k = 3; 
         // System.out.println(Arrays.toString(removeAllOccurrencesOfAnElementInAnArray(a, k)));
-        System.out.println(secondLargestElementInAnArray(a));
+        // System.out.println(secondLargestElementInAnArrayStreamsWithoutSorting(a));
+        System.out.println(Arrays.toString(elementsByFrequency(nums)));
     }
 
     /* REMOVE ALL OCCURENCES OF AN ELEMENT IN AN ARRAY */
@@ -44,6 +45,18 @@ public class ArrayProblems {
         }
 
         return max2;
+    }
+
+    /* SECOND LARGEST ELEMENT IN AN ARRAY USING STREAMS */
+     public static int secondLargestElementInAnArrayStreamsWithSorting(int[] arr){
+        return Arrays.stream(arr).distinct().boxed().sorted((a,b) -> b-a).skip(1).findFirst().orElse(Integer.MIN_VALUE);
+    }
+
+    /* SECOND LARGEST ELEMENT IN AN ARRAY WITHOUT SORTING USING STREAMS*/
+    public static int secondLargestElementInAnArrayStreamsWithoutSorting(int[] arr){
+        int max = Arrays.stream(arr).max().getAsInt();
+
+        return Arrays.stream(arr).filter(x -> x!=max).max().getAsInt();
     }
 
     /* MAXIMUM NUMBER OF CONSECUTIVE 1s OR 0s */
@@ -106,4 +119,55 @@ public class ArrayProblems {
 
         return result;
     }
+
+    /* SORT ELEMENTS BY FREQUENCY */
+    public static int[] elementsByFrequency(int[] nums){
+        HashMap<Integer, Integer> counts = new HashMap<>();
+        Integer[] ints = new Integer[nums.length];
+
+        for(int i = 0 ; i < nums.length ; i++){
+            ints[i] = nums[i];
+            counts.put(nums[i], counts.getOrDefault(nums[i], 0) + 1);
+        }
+
+        Arrays.sort(ints, (a,b) -> {
+            int freqA = counts.get(a);
+            int freqB = counts.get(b);
+            if(freqA == freqB){
+                return b - a;
+            }
+            else {
+                return freqA - freqB;
+            }
+        });
+
+        int[] result = new int[nums.length];
+
+        for(int i = 0 ; i < ints.length ; i++){
+            result[i] = ints[i];
+        }
+
+        return result;
+    }
+
+    /* SORT ELEMENTS BY FREQUENCY USING STREAMS*/
+    public static int[] elementsByFrequencyUsingStreams(int[] nums){
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for(int i : nums){
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+
+        List<Integer> list = IntStream.of(nums).boxed().collect(Collectors.toList());
+
+        list.sort((a,b) -> {
+            int freqCompare = map.get(a).compareTo(map.get(b));
+            if(freqCompare == 0) return b.compareTo(a);
+            else return freqCompare;
+        });
+
+        return list.stream().mapToInt(x -> x).toArray();
+    }
+
+    
 }
