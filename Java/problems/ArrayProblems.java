@@ -1,7 +1,6 @@
 package Java.problems;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -9,11 +8,13 @@ public class ArrayProblems {
     
     public static void main(String[] args) {
         int[] a = { 3, 9, 2, 3, 1, 7, 2, 3, 5 }; 
-        int[] nums = {5, 5, 4, 6, 4};
+        int[] nums = {1,2,3,4,5,6,7};
         int k = 3; 
         // System.out.println(Arrays.toString(removeAllOccurrencesOfAnElementInAnArray(a, k)));
         // System.out.println(secondLargestElementInAnArrayStreamsWithoutSorting(a));
-        System.out.println(Arrays.toString(elementsByFrequency(nums)));
+        // System.out.println(Arrays.toString(elementsByFrequency(nums)));
+        rotateArray(nums, k);
+        System.out.println(Arrays.toString(nums));
     }
 
     /* REMOVE ALL OCCURENCES OF AN ELEMENT IN AN ARRAY */
@@ -78,8 +79,22 @@ public class ArrayProblems {
     }
 
     /* ROTATE ARRAY */
-    public static int[] rotateArray(int[] arr, int k){
-        return arr;
+    public static void rotateArray(int[] nums, int k){
+        k = k % nums.length;
+        System.out.println(k);
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k-1);
+        reverse(nums, k, nums.length - 1);
+    }
+
+    public static void reverse(int[] nums, int left, int right){
+        while(left < right){
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
     }
 
     /* REARRANGE POSITIVE AND NEGATIVE NUMBERS IN ALTERNATE FASHION */
