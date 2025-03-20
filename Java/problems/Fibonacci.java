@@ -5,13 +5,27 @@ import java.util.HashMap;
 public class Fibonacci {
     
     public static void main(String[] args) {
-        System.out.println(dynamicFibonacci2(4));
+        // System.out.println(dynamicFibonacci2(4));
+        fibonacciUsingLoop(10);
     }
     //Recursive approach
     public static int fibonacci(int n){
         if(n == 1 || n == 2) return 1;
 
         else return fibonacci(n-1) + fibonacci(n-2);
+    }
+
+    //USING LOOP
+    public static void fibonacciUsingLoop(int n){
+        int a = 0, b = 1;
+        System.out.print(a + " " + b + " ");
+
+        for(int i = 2; i < n ; i++){
+            int next = a + b;
+            System.out.print(next + " ");
+            a = b;
+            b = next;
+        }
     }
 
     //DYNAMIC PROGRAMMING
