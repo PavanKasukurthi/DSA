@@ -1,5 +1,6 @@
 package Java.problems;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class StringProblems {
     public static void main(String[] args) {
@@ -8,7 +9,10 @@ public class StringProblems {
         // System.out.println(checkRotation("aab", "aba"));
         //System.out.println(nonRepeatingChar("geekforgeeks"));
         String[] strs = {"flower","flow","flight"};
-        System.out.println(longestCommonPrefix(strs));
+        // System.out.println(longestCommonPrefix(strs));
+        // System.out.println(longestSubstringWithoutRepeatingCharacters("pwwkew"));
+        System.out.println(expandString("a2b5c3"));
+
     }
 
     /* REVERSE A STRING */
@@ -121,4 +125,45 @@ public class StringProblems {
 
         return false;
     }  
+
+    /*LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS */
+    public static int longestSubstringWithoutRepeatingCharacters(String str){
+        int i = 0, j = 0, max = 0;
+
+        HashSet<Character> set = new HashSet<>();
+
+        while (j < str.length()) {
+            if(!set.contains(str.charAt(j))){
+                set.add(str.charAt(j));
+                j++;
+                max = Math.max(max, set.size());
+            }
+            else{
+                set.remove(str.charAt(i));
+                i++;
+            }
+        }
+        return max;
+    }
+
+    //EXPAND STRING a2b3c4 -> aabbbcccc
+    public static String expandString(String str) {
+        StringBuilder result = new StringBuilder();
+        char prevChar = '\0'; // To store the previous character
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+
+            if (Character.isLetter(ch)) {
+                prevChar = ch; // Store the letter
+            } else if (Character.isDigit(ch) && prevChar != '\0') {
+                int count = ch - '0'; // Convert character digit to integer
+                for (int j = 0; j < count; j++) {
+                    result.append(prevChar);
+                }
+            }
+        }
+
+        return result.toString();
+    }
 }
