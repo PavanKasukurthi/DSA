@@ -1,6 +1,6 @@
 package Java.problems;
 import java.util.*;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 
 public class StringProblems {
     public static void main(String[] args) {
@@ -11,8 +11,9 @@ public class StringProblems {
         String[] strs = {"flower","flow","flight"};
         // System.out.println(longestCommonPrefix(strs));
         // System.out.println(longestSubstringWithoutRepeatingCharacters("pwwkew"));
-        System.out.println(expandString("a2b5c3"));
-
+        // System.out.println(expandString("a2b5c3"));
+        // frequencyOfCharacters("operations");
+        System.out.println(removeConsecutiveVowels("geek for geeks"));
     }
 
     /* REVERSE A STRING */
@@ -165,5 +166,32 @@ public class StringProblems {
         }
 
         return result.toString();
+    }
+
+    //FREQUENCY OF CHARACTERS USING JAVA 8
+    public static void frequencyOfCharacters(String str){
+        Map<Character, Long> charFreq = str.chars().mapToObj(c -> (char)c)
+        .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+
+        System.out.println(charFreq);
+    }
+
+    //REMOVE CONSECUTIVE VOWELS
+    public static String removeConsecutiveVowels(String str){
+
+        StringBuilder result = new StringBuilder();
+        result.append(str.charAt(0));
+
+        for(int i = 1 ; i < str.length() ; i++){
+            if(!isVowel(str.charAt(i-1)) || !isVowel(str.charAt(i))){
+                result.append(str.charAt(i));
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static boolean isVowel(char c){
+        return (c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u');
     }
 }
