@@ -1,6 +1,8 @@
 package Java.problems;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class StringProblems {
     public static void main(String[] args) {
@@ -39,6 +41,15 @@ public class StringProblems {
         return s.toString();
     }
 
+    //STRING REVERSAL USING STREAMS
+    public static String reverseStringUsingStreams(String str){
+        return IntStream.range(0, str.length())
+        .map(i -> str.length() - 1 - i)
+        .mapToObj(str::charAt)
+        .map(String::valueOf)
+        .collect(Collectors.joining());
+    }
+
     /* REVERSE WORDS IN A GIVEN STRING */
     //USING STRING ARRAY
     public static String reverseWordsInAString(String str){
@@ -72,6 +83,20 @@ public class StringProblems {
         }
 
         return '$';
+    }
+
+    /* FIRST NON-REPEATING CHARACTER IN A STRING USING STREAMS */
+    public static char firstNonRepeatingChar(String str){
+
+       return str.chars().mapToObj(c -> (char)c)
+        .collect(Collectors.groupingBy(c -> c, Collectors.counting()))
+        .entrySet()
+        .stream()
+        .filter(entry -> entry.getValue() == 1)
+        .map(Map.Entry::getKey)
+        .findFirst()
+        .orElse(null);
+
     }
 
     /* LONGEST COMMON PREFIX */
