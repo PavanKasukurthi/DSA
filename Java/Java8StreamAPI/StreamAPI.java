@@ -86,7 +86,7 @@ public class StreamAPI {
         List<Employee> employeesWhoKnowJava = employees.stream().filter(e -> e.getTechStack().contains("Java")).collect(Collectors.toList());
         employeesWhoKnowJava.forEach(e -> System.out.print(e.getName() + " "));
 
-        //EMPLOYEES WHO KNOW JAVA AND C++
+        //EMPLOYEES WHO KNOW JAVA AND C
         System.out.println("Employees who know Java and C");
         List<Employee> employeesWhoKnowJavaAndC = employees.stream().filter(e -> e.getTechStack().contains("Java") && e.getTechStack().contains("C")).collect(Collectors.toList());
         employeesWhoKnowJavaAndC.forEach(e -> System.out.print(e.getName() + " "));
@@ -121,6 +121,8 @@ public class StreamAPI {
 
         employeesWithSalaryGreaterThan5000.forEach(e -> System.out.println(e.getName() + " --> " +  e.getSalary() + "\t"));
 
+        System.out.println();
+        
         //EMPLOYEES WHOSE TECHSTACK STARTS WITH THE LETTER R
         System.out.println("Employees whose techstack starts with the letter R");
         List<Employee> employeesTechStackStartingWithR = employees.stream()
@@ -129,5 +131,121 @@ public class StreamAPI {
         employeesTechStackStartingWithR.forEach(e -> System.out.print(e.getName() + " "));
         
         System.out.println();
+
+        //EACH GENDER COUNT IN CIS DEPARTMENT
+        System.out.println("Each gender count in CIS department");
+        Map<String, Long> genderCountInCISDepartment = employees.stream()
+        .filter(x -> x.getDepartment().equalsIgnoreCase("CIS"))
+        .collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
+        
+        System.out.print("gender count: "  + genderCountInCISDepartment);
+
+        System.out.println();
+
+        //PRINT THE EMPLOYEES WHO KNOW JAVA AND C IN DX DEPARTMENT
+        System.out.println("Print the employees who know Java and C in DX department");
+        List<Employee> employeesWhoKnowJavaAndCInDX = employees.stream()
+        .filter(x -> x.getDepartment().equalsIgnoreCase("DX") && x.getTechStack().contains("Java") && x.getTechStack().contains("C"))
+        .collect(Collectors.toList());
+
+        employeesWhoKnowJavaAndCInDX.forEach(e -> System.out.print(e.getName()));
+
+        System.out.println();
+
+        //PRINT THE EMPLOYEES WHO JOINED AFTER 2015 IN CIS DEPARTMENT
+        System.out.println("Print the employees who joined after 2015 in CIS department");
+        List<Employee> employeesWhoJoinedAfter2015InCIS = employees.stream()
+        .filter(e -> e.getDepartment().equalsIgnoreCase("CIS") && e.getYearOfJoining() > 2015)
+        .collect(Collectors.toList());
+
+        employeesWhoJoinedAfter2015InCIS.forEach(e -> System.out.println(e.getName()));
+
+        System.out.println();
+
+        //PRINT THE EMPLOYEES WHOSE NAME STARTS WITH 'T' IN ENG DEPARTMENT
+        System.out.println("Print the employees whose name starts with 'T' in ENG department");
+        List<Employee> employeesNameStartingWithTInENG = employees.stream()
+        .filter(e -> e.getDepartment().equalsIgnoreCase("ENG") && e.getName().startsWith("T")).collect(Collectors.toList());
+
+        employeesNameStartingWithTInENG.forEach(e -> System.out.println(e.getName()));
+        
+        System.out.println();
+
+        //PRINT THE EMPLOYEES WHOSE NAME CONTAINS 'U' IN THE LIST
+        System.out.println("Print the employees whose name contains 'u' in the list");
+        List<Employee> employeesWhoseNameContainsU = employees.stream()
+        .filter(e -> e.getName().contains("u") || e.getName().contains("U")).collect(Collectors.toList());
+
+        employeesWhoseNameContainsU.forEach(e -> System.out.println(e.getName()));
+
+        System.out.println();
+
+        //PRINT THE EMPLOYEES WHOSE TECHSTACK AS IN THE GIVEN LIST
+        System.out.println("Employees techstack is same as the given list ");
+        List<String> customTechStack = Arrays.asList("Java", "JavaScript", "C#");
+        List<Employee> employeesWithSameTechStack = employees.stream()
+        .filter(x -> x.getTechStack().containsAll(customTechStack))
+        .collect(Collectors.toList());
+
+        employeesWithSameTechStack.forEach(x -> System.out.println(x.getName()));
+
+        System.out.println();
+
+        //PRINT THE EMPLOYEES WHO HAS SAME TECHSTACK AS THE EMPLOYEE WITH ID 1
+        System.out.println("Employees with the same techstack as the employee with id 1 ");
+        List<String> firstEmployeeTechStack = employees.stream()
+        .filter(e -> e.getId() == 1)
+        .map(Employee::getTechStack)
+        .flatMap(List::stream)
+        .collect(Collectors.toList());
+
+        List<Employee> employeesWithSameTechStackAsFirstEmployee = employees.stream()
+        .filter(e -> e.getTechStack().containsAll(firstEmployeeTechStack))
+        .collect(Collectors.toList());
+
+        employeesWithSameTechStackAsFirstEmployee.forEach(e -> System.out.println(e.getName()));
+
+        System.out.println();
+
+        //PRINT THE EMPLOYEES WITH SAME TECHSTACKS
+        System.out.println("Employees with same techStacks ");
+        List<List<Object>> employeesWithSameTechStacks = employees.stream()
+            .flatMap(e -> employees.stream()
+                .filter(f -> !f.equals(e) && f.getTechStack().containsAll(e.getTechStack()))
+                .map(f -> Arrays.asList(e.getName(), f.getName(), e.getTechStack())))
+        .distinct()
+        .collect(Collectors.toList());
+
+        employeesWithSameTechStacks.forEach(e -> System.out.println(e.get(0) + " and " + e.get(1) + " have the same techStacks: " + e.get(2) + "\n"));
+
+        System.out.println();
+
+        //SORT EMPLOYEES BASED ON THEIR SALARIES
+        System.out.println("Sort employees based on their salaries ");
+        List<Employee> employeesSortedBasedOnTheirSalaries = employees.stream()
+            .sorted((e,f) -> Double.compare(e.getSalary(), f.getSalary()))
+            .collect(Collectors.toList());
+
+        employeesSortedBasedOnTheirSalaries.forEach(e -> System.out.println(e.getName() + " -> " + e.getSalary()));
+
+        System.out.println();
+
+         //SORT EMPLOYEES BASED ON THEIR SALARIES IN DESCENDING OTDER
+        System.out.println("Sort employees based on their salaries in descending order");
+        List<Employee> employeesSortedBasedOnTheirSalariesDesc = employees.stream()
+            .sorted((e,f) -> Double.compare(f.getSalary(), e.getSalary()))
+            .collect(Collectors.toList());
+
+        employeesSortedBasedOnTheirSalariesDesc.forEach(e -> System.out.println(e.getName() + " -> " + e.getSalary()));
+
+        System.out.println();
+
+        //SORT EMPLOYEES BASED ON THEIR SALARIES AND IF THE SALARIES ARE SAME THEN SORT THEM BASED ON THEIR AGE
+        System.out.println("Sort the employees based on their salaries and if the salaries are same then sort them based on their age ");
+        List<Employee> employeesSortedBasedOnTheirSalariesAndAge = employees.stream()
+            .sorted((e,f) -> e.getSalary() == f.getSalary() ? Integer.compare(e.getAge(), f.getAge()) : Double.compare(e.getSalary(), f.getSalary()))
+            .collect(Collectors.toList());
+
+        employeesSortedBasedOnTheirSalariesAndAge.forEach(e -> System.out.println(e.getName() + " -> " + e.getSalary() + " -> " + e.getAge()));
     }
 }
