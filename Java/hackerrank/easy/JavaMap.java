@@ -21,10 +21,10 @@ public class JavaMap {
         while (in.hasNext()) {
             String s = in.nextLine();
 
-            if(contact.containsKey(s)){
+            if (contact.containsKey(s)) {
                 System.out.println(s + "=" + contact.get(s));
-            }
-            else System.out.println("Not Founds");
+            } else
+                System.out.println("Not Found");
         }
     }
 }
