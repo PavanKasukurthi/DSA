@@ -138,6 +138,21 @@ public class StreamAPI {
 
         System.out.println();
 
+        // SECOND HIGHEST W.R.T. DEPARTMENT
+        System.out.println("Second Highest with respect to department");
+
+        Map<String, Optional<Employee>> secondHightestInDepartment = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment,
+                        Collectors.collectingAndThen(Collectors.toList(), list -> list.stream()
+                                .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+                                .skip(1).findFirst())));
+
+        secondHightestInDepartment.forEach((dept, emp) -> System.out.println(
+                dept + " -> " + emp.map(e -> e.getDepartment() + " -> " + e.getName() + " -> " + e.getSalary())
+                        .orElse("Not enough employees")));
+
+        System.out.println();
+
         // EMPLOYEES AND THEIR SALARIES WHO EARN THE LEAST IN THEIR DEPARTMENT
         System.out.println("Employees who earn the least in their department");
 
