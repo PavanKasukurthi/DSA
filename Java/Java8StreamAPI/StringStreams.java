@@ -15,10 +15,10 @@ public class StringStreams {
         String[] s1 = { "a", "b", "c", "d", "e" };
         String[] s2 = { "c", "d", "f", "g" };
 
-        // listDifference(s1, s2);
+        listDifference(s1, s2);
 
         List<String> words = Arrays.asList("testing", "java", "streams");
-        System.out.println(containsSpecificSubstring("test", words));
+        // System.out.println(containsSpecificSubstring("test", words));
     }
 
     // CHARACTER FREQUENCY
@@ -66,18 +66,14 @@ public class StringStreams {
     // Remove elements from list1 that are also in list2
     // Remove elements from list2 that are also in list1 (original)
     public static void listDifference(String[] arr1, String[] arr2) {
-        // List<String> list1 = new ArrayList<>(arr1.asList());
-        Set<String> set1 = new HashSet<>(Arrays.asList(arr1));
-        Set<String> set2 = new HashSet<>(Arrays.asList(arr2));
+        List<String> list1 = Arrays.stream(arr1).toList();
+        List<String> list2 = Arrays.stream(arr2).toList();
 
-        List<String> list1 = Arrays.stream(arr1)
-                .filter(e -> !set2.contains(e)).collect(Collectors.toList());
+        List<String> result1 = list1.stream().filter(c -> !list2.contains(c)).collect(Collectors.toList());
+        List<String> result2 = list2.stream().filter(c -> !list1.contains(c)).collect(Collectors.toList());
 
-        List<String> list2 = Arrays.stream(arr2)
-                .filter(e -> !set1.contains(e)).collect(Collectors.toList());
-
-        System.out.println(list1);
-        System.out.println(list2);
+        System.out.println(result1);
+        System.out.println(result2);
     }
 
     // ANY STRING IN A LIST CONTAINS A SPECIFIC SUBSTRING
