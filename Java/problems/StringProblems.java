@@ -228,6 +228,10 @@ public class StringProblems {
     }
 
     // REMOVE CONSECUTIVE VOWELS
+    public static boolean isVowel(char c) {
+        return (c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u');
+    }
+
     public static String removeConsecutiveVowels(String str) {
 
         StringBuilder result = new StringBuilder();
@@ -242,8 +246,15 @@ public class StringProblems {
         return result.toString();
     }
 
-    public static boolean isVowel(char c) {
-        return (c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u');
+    public static String removeConsecutiveVowelsUsingStreams(String str) {
+        StringBuilder result = new StringBuilder();
+        result.append(str.charAt(0));
+
+        IntStream.range(1, str.length())
+                .filter(c -> !isVowel(str.charAt(c - 1)) || !isVowel(str.charAt(c)))
+                .forEach(c -> result.append(str.charAt(c)));
+
+        return result.toString();
     }
 
     // VALID PARANTHESIS
