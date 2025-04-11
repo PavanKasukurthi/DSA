@@ -207,14 +207,13 @@ public class ArrayProblems {
     // Remove elements from list1 that are also in list2
     // Remove elements from list2 that are also in list1 (original)
     public static void listDifference(int[] arr1, int[] arr2) {
+        List<Integer> list1 = Arrays.stream(arr1).boxed().collect(Collectors.toList());
+        List<Integer> list2 = Arrays.stream(arr2).boxed().collect(Collectors.toList());
 
-        Set<Integer> set1 = new HashSet<>(Arrays.stream(arr1).boxed().collect(Collectors.toList()));
-        Set<Integer> set2 = new HashSet<>(Arrays.stream(arr2).boxed().collect(Collectors.toList()));
+        List<Integer> result1 = list1.stream().filter(e -> !list2.contains(e)).collect((Collectors.toList()));
+        List<Integer> result2 = list2.stream().filter(e -> !list1.contains(e)).collect((Collectors.toList()));
 
-        List<Integer> list1 = Arrays.stream(arr1).boxed().filter(e -> !set2.contains(e)).collect(Collectors.toList());
-        List<Integer> list2 = Arrays.stream(arr2).boxed().filter(e -> !set1.contains(e)).collect(Collectors.toList());
-
-        System.out.println(list1);
-        System.out.println(list2);
+        System.out.println(result1);
+        System.out.println(result2);
     }
 }
