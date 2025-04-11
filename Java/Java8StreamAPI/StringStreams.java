@@ -12,10 +12,13 @@ import java.util.stream.Collectors;
 public class StringStreams {
     public static void main(String[] args) {
         // charFrequency("askjdnjzn");
-        String[] s1 = {"a", "b", "c", "d", "e"};
-        String[] s2 = {"c", "d", "f", "g"};
+        String[] s1 = { "a", "b", "c", "d", "e" };
+        String[] s2 = { "c", "d", "f", "g" };
 
-        listDifference(s1, s2);
+        // listDifference(s1, s2);
+
+        List<String> words = Arrays.asList("testing", "java", "streams");
+        System.out.println(containsSpecificSubstring("test", words));
     }
 
     // CHARACTER FREQUENCY
@@ -75,5 +78,11 @@ public class StringStreams {
 
         System.out.println(list1);
         System.out.println(list2);
+    }
+
+    // ANY STRING IN A LIST CONTAINS A SPECIFIC SUBSTRING
+    public static boolean containsSpecificSubstring(String str, List<String> stringList) {
+
+        return stringList.stream().anyMatch(e -> e.contains(str));
     }
 }
