@@ -1,6 +1,9 @@
 package Java.Java8StreamAPI;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -8,7 +11,11 @@ import java.util.stream.Collectors;
 
 public class StringStreams {
     public static void main(String[] args) {
-        charFrequency("askjdnjzn");
+        // charFrequency("askjdnjzn");
+        String[] s1 = {"a", "b", "c", "d", "e"};
+        String[] s2 = {"c", "d", "f", "g"};
+
+        listDifference(s1, s2);
     }
 
     // CHARACTER FREQUENCY
@@ -50,5 +57,23 @@ public class StringStreams {
                 .map(Map.Entry::getKey)
                 .findFirst()
                 .orElse('\0');
+    }
+
+    // Given two lists list1 and list2,
+    // Remove elements from list1 that are also in list2
+    // Remove elements from list2 that are also in list1 (original)
+    public static void listDifference(String[] arr1, String[] arr2) {
+        // List<String> list1 = new ArrayList<>(arr1.asList());
+        Set<String> set1 = new HashSet<>(Arrays.asList(arr1));
+        Set<String> set2 = new HashSet<>(Arrays.asList(arr2));
+
+        List<String> list1 = Arrays.stream(arr1)
+                .filter(e -> !set2.contains(e)).collect(Collectors.toList());
+
+        List<String> list2 = Arrays.stream(arr2)
+                .filter(e -> !set1.contains(e)).collect(Collectors.toList());
+
+        System.out.println(list1);
+        System.out.println(list2);
     }
 }
