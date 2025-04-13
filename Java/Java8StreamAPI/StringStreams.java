@@ -1,6 +1,5 @@
 package Java.Java8StreamAPI;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StringStreams {
     public static void main(String[] args) {
@@ -15,10 +15,12 @@ public class StringStreams {
         String[] s1 = { "a", "b", "c", "d", "e" };
         String[] s2 = { "c", "d", "f", "g" };
 
-        listDifference(s1, s2);
+        // listDifference(s1, s2);
 
         List<String> words = Arrays.asList("testing", "java", "streams");
         // System.out.println(containsSpecificSubstring("test", words));
+
+        printStringCombinations("abc");
     }
 
     // CHARACTER FREQUENCY
@@ -80,5 +82,22 @@ public class StringStreams {
     public static boolean containsSpecificSubstring(String str, List<String> stringList) {
 
         return stringList.stream().anyMatch(e -> e.contains(str));
+    }
+
+    // STRING COMBINATIONS USING JAVA STREAMS
+    public static Stream<String> stringCombinations(String str) {
+        if (str.isEmpty())
+            return Stream.of("");
+
+        char first = str.charAt(0);
+        String rest = str.substring(1);
+
+        return stringCombinations(rest).flatMap(s -> Stream.of(s, first + s));
+    }
+
+    public static void printStringCombinations(String str) {
+        List<String> allCombinations = stringCombinations(str).collect(Collectors.toList());
+
+        allCombinations.forEach(System.out::println);
     }
 }
