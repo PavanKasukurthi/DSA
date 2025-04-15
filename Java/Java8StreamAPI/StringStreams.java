@@ -1,6 +1,7 @@
 package Java.Java8StreamAPI;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,10 @@ public class StringStreams {
         List<String> words = Arrays.asList("testing", "java", "streams");
         // System.out.println(containsSpecificSubstring("test", words));
 
-        printStringCombinations("abc");
+        // printStringCombinations("abc");
+
+        List<String> names = Arrays.asList("Clark Kent", "Bruce Wayne", "Hal Jordan");
+        lastNameSort(names);
     }
 
     // CHARACTER FREQUENCY
@@ -99,5 +103,13 @@ public class StringStreams {
         List<String> allCombinations = stringCombinations(str).collect(Collectors.toList());
 
         allCombinations.forEach(System.out::println);
+    }
+
+    // SORT NAMES BASED ON LAST NAME
+    public static void lastNameSort(List<String> names) {
+
+        names.sort(Comparator.comparing(name -> name.split(" ")[1]));
+
+        names.forEach(System.out::println);
     }
 }
