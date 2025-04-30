@@ -5,10 +5,11 @@ import java.util.stream.*;
 
 public class NumericalStreams {
     public static void main(String[] args) {
-        int[] numbers = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 17, 20 };
+        int[] numbers = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 17, 20, 59, 57, 45 };
         // primeNumbers(numbers);
 
-        evenOddPartitioner(numbers);
+        // evenOddPartitioner(numbers);
+        numbersStartingWith5(numbers);
     }
 
     public static void primeNumbers(int[] num) {
@@ -37,5 +38,14 @@ public class NumericalStreams {
 
         System.out.println("Even numbers " + partitioned.get(true));
         System.out.println("Odd numbers " + partitioned.get(false));
+    }
+
+    // Numbers starting with 5
+    public static void numbersStartingWith5(int[] nums) {
+        List<Integer> result = Arrays.stream(nums).boxed()
+                .filter(n -> String.valueOf(n).startsWith("5"))
+                .collect(Collectors.toList());
+
+        System.out.println(result);
     }
 }
