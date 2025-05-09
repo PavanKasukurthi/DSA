@@ -3,6 +3,7 @@ package Java.Java8StreamAPI;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -59,7 +60,7 @@ public class StringStreams {
     public static char firstNonRepeatedChar2(String str) {
         return str.chars()
                 .mapToObj(c -> (char) c)
-                .collect(Collectors.groupingBy(c -> c, Collectors.counting()))
+                .collect(Collectors.groupingBy(c -> c, LinkedHashMap::new, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() == 1)
