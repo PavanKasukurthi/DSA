@@ -16,7 +16,8 @@ public class StringProblems {
         // System.out.println(longestSubstringWithoutRepeatingCharacters("pwwkew"));
         // System.out.println(expandString("a2b5c3"));
         // frequencyOfCharacters("operations");
-        System.out.println(removeConsecutiveVowels("geek for geeks"));
+        // System.out.println(removeConsecutiveVowels("geek for geeks"));
+        characterFrequency("nzcxfxv");
     }
 
     /* PALINDROME */
@@ -279,5 +280,27 @@ public class StringProblems {
 
         return stack.isEmpty(); // When every pair is removed then stack becomes empty and it is true, else
                                 // false
+    }
+
+    // CHARACTER FREQUENCY WITHOUT USING HASHMAP
+    public static void characterFrequency(String str) {
+        int[] freq = new int[256];
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            freq[ch]++;
+        }
+
+        // System.out.println(Arrays.toString(freq));
+
+        boolean[] printed = new boolean[256];
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (!printed[ch]) {
+                System.out.println(ch + " : " + freq[ch]);
+                printed[ch] = true;
+            }
+        }
     }
 }
