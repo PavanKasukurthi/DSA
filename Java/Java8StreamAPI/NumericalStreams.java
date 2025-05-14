@@ -9,7 +9,8 @@ public class NumericalStreams {
         // primeNumbers(numbers);
 
         // evenOddPartitioner(numbers);
-        numbersStartingWith5(numbers);
+        // numbersStartingWith5(numbers);
+        integerFrequency(numbers);
     }
 
     public static void primeNumbers(int[] num) {
@@ -47,5 +48,14 @@ public class NumericalStreams {
                 .collect(Collectors.toList());
 
         System.out.println(result);
+    }
+
+    // Frequency of Integers
+    public static void integerFrequency(int[] nums) {
+        Map<Integer, Long> map = Arrays.stream(nums)
+                .boxed()
+                .collect(Collectors.groupingBy(i -> i, Collectors.counting()));
+
+        System.out.println(map);
     }
 }
