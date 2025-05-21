@@ -113,4 +113,14 @@ public class StringStreams {
 
         names.forEach(System.out::println);
     }
+
+    // Common elements of two lists
+    public static void commonElementsOfLists(List<Integer> list1, List<Integer> list2) {
+        List<Integer> commonElements = list1.stream()
+                .filter(list2::contains)
+                .distinct()
+                .collect(Collectors.toList());
+
+        System.out.println(commonElements);
+    }
 }
