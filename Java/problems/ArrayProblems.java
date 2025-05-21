@@ -1,7 +1,6 @@
 package Java.problems;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -215,5 +214,14 @@ public class ArrayProblems {
 
         System.out.println(result1);
         System.out.println(result2);
+    }
+
+    public static List<Integer> numbersStartingWith5(int[] nums) {
+        List<Integer> resultList = Arrays.stream(nums)
+                .filter(x -> String.valueOf(x).startsWith("5"))
+                .boxed()
+                .collect(Collectors.toList());
+
+        return resultList;
     }
 }
