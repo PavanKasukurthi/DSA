@@ -17,7 +17,8 @@ public class StringProblems {
         // System.out.println(expandString("a2b5c3"));
         // frequencyOfCharacters("operations");
         // System.out.println(removeConsecutiveVowels("geek for geeks"));
-        characterFrequency("nzcxfxv");
+        // characterFrequency("nzcxfxv");
+        stringSwap("First", "Second");
     }
 
     /* PALINDROME */
@@ -302,5 +303,15 @@ public class StringProblems {
                 printed[ch] = true;
             }
         }
+    }
+
+    // Swapping two strings without using a temp variable and special methods
+    public static void stringSwap(String str1, String str2) {
+        str1 = str1 + str2;
+        str2 = str1.substring(0, str1.length() - str2.length());
+        str1 = str1.substring(str2.length());
+
+        System.out.println("Str1: " + str1);
+        System.out.println("Str2: " + str2);
     }
 }
