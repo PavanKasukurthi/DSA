@@ -336,5 +336,17 @@ public class StreamAPI {
                 employeesSortedBasedOnTheirSalariesAndAge
                                 .forEach(e -> System.out
                                                 .println(e.getName() + " -> " + e.getSalary() + " -> " + e.getAge()));
+
+                //GENDER COUNT IN EACH DEPARTMENT
+                Map<String, Map<String, Long>> genderCountInEachDept = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment,
+                Collectors.groupingBy(Employee::getGender, Collectors.counting())));
+
+                genderCountInEachDept.forEach((dept, genderMap) -> {
+                        System.out.println(dept);
+                        genderMap.forEach((gender, count) -> 
+                                System.out.println(gender + ": " + count));
+                      
+                });
         }
 }
