@@ -3,9 +3,10 @@ package Java.leetcode.easy;
 import java.util.ArrayList;
 import java.util.List;
 
+/*LEETCODE 2942*/
 public class FindWordsContainingCharacter {
     public static void main(String[] args) {
-        String[] words = {"leet","code"};
+        String[] words = { "leet", "code" };
         char x = 'e';
         System.out.println(findWordsContaining(words, x));
     }
