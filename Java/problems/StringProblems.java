@@ -1,7 +1,6 @@
 package Java.problems;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,7 +17,8 @@ public class StringProblems {
         // frequencyOfCharacters("operations");
         // System.out.println(removeConsecutiveVowels("geek for geeks"));
         // characterFrequency("nzcxfxv");
-        stringSwap("First", "Second");
+        // stringSwap("First", "Second");
+        System.out.println(reverseStringUsingStreams("abcd"));
     }
 
     /* PALINDROME */
@@ -65,11 +65,15 @@ public class StringProblems {
 
     // STRING REVERSAL USING STREAMS
     public static String reverseStringUsingStreams(String str) {
-        return IntStream.range(0, str.length())
-                .map(i -> str.length() - 1 - i)
-                .mapToObj(str::charAt)
-                .map(String::valueOf)
-                .collect(Collectors.joining());
+        return str.chars().mapToObj(c -> (char) c)
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> {
+                            Collections.reverse(list);
+                            return list.stream()
+                                    .map(String::valueOf)
+                                    .collect(Collectors.joining());
+                        }));
     }
 
     /* REVERSE WORDS IN A GIVEN STRING */
