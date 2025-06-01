@@ -1,5 +1,6 @@
 package Java.Java8StreamAPI;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -25,7 +26,8 @@ public class StringStreams {
         // printStringCombinations("abc");
 
         List<String> names = Arrays.asList("Clark Kent", "Bruce Wayne", "Hal Jordan");
-        lastNameSort(names);
+        // lastNameSort(names);
+        groupStringsBasedOnLengths(words);
     }
 
     // CHARACTER FREQUENCY
@@ -122,5 +124,14 @@ public class StringStreams {
                 .collect(Collectors.toList());
 
         System.out.println(commonElements);
+    }
+
+    // Grouping Strings as lists based on their lengths
+    public static void groupStringsBasedOnLengths(List<String> list) {
+        Map<Integer, ArrayList<String>> map = list.stream().collect(Collectors.groupingBy(
+                String::length,
+                Collectors.toCollection(ArrayList::new)));
+
+        map.forEach((length, groupList) -> System.out.println(length + " -> " + groupList));
     }
 }
