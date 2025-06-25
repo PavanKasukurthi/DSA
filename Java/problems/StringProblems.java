@@ -18,7 +18,8 @@ public class StringProblems {
         // System.out.println(removeConsecutiveVowels("geek for geeks"));
         // characterFrequency("nzcxfxv");
         // stringSwap("First", "Second");
-        System.out.println(reverseStringUsingStreams("abcd"));
+        // System.out.println(reverseStringUsingStreams("abcd"));
+        percentageOfChars("Tiger Runs @ The Speed Of 100 km/hour.");
     }
 
     /* PALINDROME */
@@ -317,5 +318,34 @@ public class StringProblems {
 
         System.out.println("Str1: " + str1);
         System.out.println("Str2: " + str2);
+    }
+
+    // Find The Percentage Of Uppercase Letters, Lowercase Letters, Digits And Other
+    // Special Characters In A String
+    public static void percentageOfChars(String str) {
+        int lowerCase = 0, upperCase = 0, digits = 0, specialChars = 0;
+
+        for (char ch : str.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                digits++;
+            } else if (Character.isLowerCase(ch)) {
+                lowerCase++;
+            } else if (Character.isUpperCase(ch)) {
+                upperCase++;
+            } else {
+                specialChars++;
+            }
+        }
+
+        int lowerCasePercentage = lowerCase * 100 / str.length();
+        int upperCasePercentage = upperCase * 100 / str.length();
+        int digitsPercentage = digits * 100 / str.length();
+        int specialCharsPercentage = specialChars * 100 / str.length();
+
+        System.out.println();
+        System.out.println("LowerCase Percentage = " + lowerCasePercentage + "%");
+        System.out.println("UpperCase Percentage = " + upperCasePercentage + "%");
+        System.out.println("Digits Percentage = " + digitsPercentage + "%");
+        System.out.println("Special Chars Percentage = " + specialCharsPercentage + "%");
     }
 }
