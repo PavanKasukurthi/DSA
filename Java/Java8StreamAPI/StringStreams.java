@@ -1,16 +1,8 @@
 package Java.Java8StreamAPI;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.*;
 
 public class StringStreams {
     public static void main(String[] args) {
@@ -106,6 +98,22 @@ public class StringStreams {
         List<String> allCombinations = stringCombinations(str).collect(Collectors.toList());
 
         allCombinations.forEach(System.out::println);
+    }
+
+    // STRING PERMUTATIONS USING JAVA STREAMS
+    public static List<String> stringPermutations(String str) {
+        if (str.length() == 1) {
+            return List.of(str);
+        }
+
+        return IntStream.range(0, str.length())
+                .boxed()
+                .flatMap(i -> {
+                    char ch = str.charAt(i);
+                    String remaining = str.substring(0, i) + str.substring(i + 1);
+                    return stringPermutations(remaining).stream().map(s -> ch + s);
+                })
+                .collect(Collectors.toList());
     }
 
     // SORT NAMES BASED ON LAST NAME
