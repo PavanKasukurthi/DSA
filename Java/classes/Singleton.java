@@ -25,3 +25,21 @@ public class Singleton {
         singleton.doSomething();
     }
 }
+
+class SingletonThreadSafe {
+    private static volatile SingletonThreadSafe instance = null;
+
+    private SingletonThreadSafe() {
+        System.out.println("Thread safe Singleton is created");
+    }
+
+    public static SingletonThreadSafe getInstance() {
+        synchronized (SingletonThreadSafe.class) {
+            if (instance == null) {
+                instance = new SingletonThreadSafe();
+            }
+        }
+
+        return instance;
+    }
+}
