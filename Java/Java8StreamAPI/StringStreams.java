@@ -19,7 +19,9 @@ public class StringStreams {
 
         List<String> names = Arrays.asList("Clark Kent", "Bruce Wayne", "Hal Jordan");
         // lastNameSort(names);
-        groupStringsBasedOnLengths(words);
+        // groupStringsBasedOnLengths(words);
+        String sentence = "Java! is great, and Java is powerful. #Java";
+        wordFrequency((sentence));
     }
 
     // CHARACTER FREQUENCY
@@ -29,6 +31,14 @@ public class StringStreams {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         charFrequency.forEach((ch, count) -> System.out.println(ch + " -> " + count));
+    }
+
+    // WORD FREQUENCY IN A SENTENCE
+    public static void wordFrequency(String sentence) {
+        Map<String, Long> wordFreq = Arrays.stream(sentence.replaceAll("[^a-zA-z\\s]", "").split("\\s+"))
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+
+        System.out.println(wordFreq);
     }
 
     // FIRST REPEATED CHARACTER IN A STRING
