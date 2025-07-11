@@ -226,6 +226,26 @@ public class StringProblems {
         return result.toString();
     }
 
+    // STRING COMPRESSION 
+    public static String stringCompression(String str){
+        if(str == null || str.isEmpty()) return str;
+
+        StringBuilder result = new StringBuilder();
+        int count = 1;
+
+        for(int i = 1; i < str.length() ; i++){
+            if(str.charAt(i) == str.charAt(i-1)){
+                count++;
+            }
+            else{
+                result.append(str.charAt(i-1)).append(count);
+            }
+        }
+        result.append(str.charAt(str.length()-1)).append(count);
+
+        return result.length() < str.length() ? result.toString() : str;
+    }
+
     // FREQUENCY OF CHARACTERS USING JAVA 8
     public static void frequencyOfCharacters(String str) {
         Map<Character, Long> charFreq = str.chars().mapToObj(c -> (char) c)
