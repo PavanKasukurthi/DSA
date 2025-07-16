@@ -2,6 +2,8 @@ package Java.code360.easy;
 
 import java.util.*;
 
+//NINJA’S SHIKANJI
+
 public class NinjaShikanji {
     public static boolean ninjaShikanji(ArrayList<Integer> bill, int n) {
 
