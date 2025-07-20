@@ -337,16 +337,23 @@ public class StreamAPI {
                                 .forEach(e -> System.out
                                                 .println(e.getName() + " -> " + e.getSalary() + " -> " + e.getAge()));
 
-                //GENDER COUNT IN EACH DEPARTMENT
+                // GENDER COUNT IN EACH DEPARTMENT
                 Map<String, Map<String, Long>> genderCountInEachDept = employees.stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment,
-                Collectors.groupingBy(Employee::getGender, Collectors.counting())));
+                                .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                Collectors.groupingBy(Employee::getGender, Collectors.counting())));
 
                 genderCountInEachDept.forEach((dept, genderMap) -> {
                         System.out.println(dept);
-                        genderMap.forEach((gender, count) -> 
-                                System.out.println(gender + ": " + count));
-                      
+                        genderMap.forEach((gender, count) -> System.out.println(gender + ": " + count));
+
                 });
+
+                // UNIQUE TECH STACK
+                List<String> uniqueTechStack = employees.stream()
+                                .flatMap(e -> e.getTechStack().stream())
+                                .distinct()
+                                .collect(Collectors.toList());
+
+                System.out.println(uniqueTechStack);
         }
 }
