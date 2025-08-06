@@ -21,7 +21,8 @@ public class StringStreams {
         // lastNameSort(names);
         // groupStringsBasedOnLengths(words);
         String sentence = "Java! is great, and Java is powerful. #Java";
-        wordFrequency((sentence));
+        // wordFrequency((sentence));
+        mostRepeatingCharacter("adkbxzcnmbmznbfjabznxcmbakshgdhkzbxcbalkdhsl");
     }
 
     // CHARACTER FREQUENCY
@@ -71,6 +72,17 @@ public class StringStreams {
                 .map(Map.Entry::getKey)
                 .findFirst()
                 .orElse('\0');
+    }
+
+    // MOST REPEATED CHARACTER IN A STRING
+    public static void mostRepeatingCharacter(String str) {
+        Optional<Map.Entry<Character, Long>> result = str.chars().mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue());
+
+        result.ifPresent(System.out::println);
     }
 
     // Given two lists list1 and list2,
