@@ -240,6 +240,7 @@ public class StringProblems {
                 count++;
             } else {
                 result.append(str.charAt(i - 1)).append(count);
+                count = 1;
             }
         }
         result.append(str.charAt(str.length() - 1)).append(count);
