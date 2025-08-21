@@ -215,9 +215,10 @@ public class StringProblems {
 
             if (Character.isLetter(ch)) {
                 prevChar = ch; // Store the letter
+                result.append(ch);
             } else if (Character.isDigit(ch) && prevChar != '\0') {
                 int count = ch - '0'; // Convert character digit to integer
-                for (int j = 0; j < count; j++) {
+                for (int j = 1; j < count; j++) {
                     result.append(prevChar);
                 }
             }
@@ -226,22 +227,22 @@ public class StringProblems {
         return result.toString();
     }
 
-    // STRING COMPRESSION 
-    public static String stringCompression(String str){
-        if(str == null || str.isEmpty()) return str;
+    // STRING COMPRESSION
+    public static String stringCompression(String str) {
+        if (str == null || str.isEmpty())
+            return str;
 
         StringBuilder result = new StringBuilder();
         int count = 1;
 
-        for(int i = 1; i < str.length() ; i++){
-            if(str.charAt(i) == str.charAt(i-1)){
+        for (int i = 1; i < str.length(); i++) {
+            if (str.charAt(i) == str.charAt(i - 1)) {
                 count++;
-            }
-            else{
-                result.append(str.charAt(i-1)).append(count);
+            } else {
+                result.append(str.charAt(i - 1)).append(count);
             }
         }
-        result.append(str.charAt(str.length()-1)).append(count);
+        result.append(str.charAt(str.length() - 1)).append(count);
 
         return result.length() < str.length() ? result.toString() : str;
     }
