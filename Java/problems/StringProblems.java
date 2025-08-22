@@ -205,6 +205,28 @@ public class StringProblems {
         return max;
     }
 
+    public static String longestSubstringWithoutRepeatingCharacters2(String str) {
+        int j = 0, max = 0, start = 0;
+
+        HashSet<Character> set = new HashSet<>();
+
+        for (int i = 0; i < str.length(); i++) {
+            if (!set.contains(str.charAt(i))) {
+                set.add(str.charAt(i));
+
+                if (set.size() > max) {
+                    max = set.size();
+                    start = j;
+                }
+            } else {
+                set.remove(str.charAt(j));
+                j++;
+            }
+        }
+
+        return str.substring(start, start + max);
+    }
+
     // EXPAND STRING a2b3c4 -> aabbbcccc
     public static String expandString(String str) {
         StringBuilder result = new StringBuilder();
