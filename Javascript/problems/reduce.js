@@ -42,3 +42,19 @@ const unique = nums.reduce((acc, curr) => {
 }, [])
 
 console.log(unique)
+
+//GROUPING BY LENGTH
+const words = ["cat", "dog", "lion", "tiger", "hi", "sun", "elephant"];
+
+const grouped = words.reduce((acc, word) => {
+  const len = word.length
+
+  if(!acc[len]){
+    acc[len] = []
+  }
+
+  acc[len].push(word)
+  return acc
+}, {})
+
+console.log(grouped)
