@@ -6,7 +6,9 @@ public class SubArrayProblems {
     public static void main(String[] args) {
         int[] nums = { 3, 4, -7, 1, 3, -4, -2, -2 };
         // System.out.println(printAllSubArrays(nums));
-        System.out.println(zeroSumSubArray(nums));
+        // System.out.println(zeroSumSubArray(nums));
+        int[] arr = { 2, 3, -2, 4 };
+        System.out.println(maxSubArrayProduct(arr));
     }
 
     // PRINT ALL SUBARRAYS
@@ -36,6 +38,31 @@ public class SubArrayProblems {
         }
 
         return maxSum;
+    }
+
+    // MAXIMUM PRODUCT OF SUBARRAY
+    public static int maxSubArrayProduct(int[] arr) {
+        if (arr == null || arr.length == 0)
+            return 0;
+
+        int max = arr[0], min = arr[0], result = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            int curr = arr[i];
+
+            if (curr < 0) {
+                int temp = max;
+                max = min;
+                min = temp;
+            }
+
+            max = Math.max(curr, max * curr);
+            min = Math.min(curr, min * curr);
+
+            result = Math.max(result, max);
+        }
+
+        return result;
     }
 
     // PRINT SUBARRAYS WITH THE SUBARRAY SUM = 0
