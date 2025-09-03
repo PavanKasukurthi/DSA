@@ -141,9 +141,10 @@ public class StringStreams {
     // SORT NAMES BASED ON LAST NAME
     public static void lastNameSort(List<String> names) {
 
-        names.sort(Comparator.comparing(name -> name.split(" ")[1]));
+        List<String> result = names.stream().sorted(Comparator.comparing(name -> name.split(" ")[1]))
+                .collect(Collectors.toList());
 
-        names.forEach(System.out::println);
+        System.out.println(result);
     }
 
     // Common elements of two lists
