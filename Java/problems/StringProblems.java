@@ -19,7 +19,8 @@ public class StringProblems {
         // characterFrequency("nzcxfxv");
         // stringSwap("First", "Second");
         // System.out.println(reverseStringUsingStreams("abcd"));
-        percentageOfChars("Tiger Runs @ The Speed Of 100 km/hour.");
+        // percentageOfChars("Tiger Runs @ The Speed Of 100 km/hour.");
+        System.out.println(firstNonRepeatingCharWithoutHashMap("aaaadddeeeeferrrrrr"));
     }
 
     /* PALINDROME */
@@ -111,6 +112,24 @@ public class StringProblems {
         }
 
         return '$';
+    }
+
+    public static char firstNonRepeatingCharWithoutHashMap(String str) {
+        int[] freq = new int[26]; // a-z
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            freq[ch - 'a']++;
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (freq[ch - 'a'] == 1) {
+                return ch;
+            }
+        }
+
+        return '\0';
     }
 
     /* FIRST NON-REPEATING CHARACTER IN A STRING USING STREAMS */
