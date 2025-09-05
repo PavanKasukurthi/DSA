@@ -6,17 +6,18 @@ public class MergeStringsAlternately {
     }
     
     public static String mergeStringsAlternately(String a, String b){
-        String mix = "";
+        StringBuilder result = new StringBuilder();
         int i = 0;
         int j = 0;
 
-        while (i < a.length() && j < b.length()){
-            mix = mix + a.charAt(i++) + b.charAt(j++);
+        while(i < word1.length() && j < word2.length()){
+            result.append(word1.charAt(i++)).append(word2.charAt(j++));
         }
 
-        if(i < a.length()) mix = mix + a.substring(i, a.length());
-        if(j < b.length()) mix = mix + b.substring(j, b.length());
-
-        return mix;
+        if(i < word1.length()) result.append(word1.substring(i,word1.length()));
+        
+        if(j < word2.length()) result.append(word2.substring(j, word2.length()));
+        
+        return result.toString();
     }
 }
