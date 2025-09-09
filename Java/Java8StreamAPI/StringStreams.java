@@ -12,7 +12,7 @@ public class StringStreams {
 
         // listDifference(s1, s2);
 
-        List<String> words = Arrays.asList("testing", "java", "streams");
+        // List<String> words = Arrays.asList("testing", "java", "streams");
         // System.out.println(containsSpecificSubstring("test", words));
 
         // printStringCombinations("abc");
@@ -22,7 +22,11 @@ public class StringStreams {
         // groupStringsBasedOnLengths(words);
         String sentence = "Java! is great, and Java is powerful. #Java";
         // wordFrequency((sentence));
-        mostRepeatingCharacter("adkbxzcnmbmznbfjabznxcmbakshgdhkzbxcbalkdhsl");
+        // mostRepeatingCharacter("adkbxzcnmbmznbfjabznxcmbakshgdhkzbxcbalkdhsl");
+        List<String> words = Arrays.asList("apple", "banana", "apple", "orange", "banana", "apple", "kiwi", "kiwi",
+                "kiwi", "kiwi");
+
+        System.out.println(topNRepeatedWords(words, 3));
     }
 
     // CHARACTER FREQUENCY
@@ -83,6 +87,18 @@ public class StringStreams {
                 .max(Map.Entry.comparingByValue());
 
         result.ifPresent(System.out::println);
+    }
+
+    // TOP N REPEATED WORDS IN A LIST OF STRINGS
+    public static List<String> topNRepeatedWords(List<String> words, int n) {
+        return words.stream()
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()))
+                .entrySet().stream()
+                .sorted((a, b) -> Long.compare(b.getValue(), a.getValue()))
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .limit(n)
+                .collect(Collectors.toList());
     }
 
     // Given two lists list1 and list2,
