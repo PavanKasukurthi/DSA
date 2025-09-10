@@ -26,7 +26,21 @@ public class StringStreams {
         List<String> words = Arrays.asList("apple", "banana", "apple", "orange", "banana", "apple", "kiwi", "kiwi",
                 "kiwi", "kiwi");
 
-        System.out.println(topNRepeatedWords(words, 3));
+        // System.out.println(topNRepeatedWords(words, 3));
+
+        List<String> sentences = Arrays.asList(
+                "Java streams are powerful",
+                "Streams help process collections",
+                "Java supports functional programming",
+                "Functional programming makes code concise",
+                "Streams can filter map and reduce data",
+                "Java is platform independent",
+                "Code once run anywhere",
+                "Collections and streams work well together",
+                "Java developers love streams",
+                "Practice makes you better at Java");
+
+        System.out.println(mostCommonWord(sentences));
     }
 
     // CHARACTER FREQUENCY
@@ -99,6 +113,16 @@ public class StringStreams {
                 .map(Map.Entry::getKey)
                 .limit(n)
                 .collect(Collectors.toList());
+    }
+
+    // MOST COMMON WORD IN A LIST OF SENTENCES
+    public static String mostCommonWord(List<String> sentences) {
+        return sentences.stream()
+                .flatMap(str -> Arrays.stream(str.toLowerCase().replaceAll("[^a-zA-z\\s+]", "\\s").split(" ")))
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .get().getKey();
     }
 
     // Given two lists list1 and list2,
