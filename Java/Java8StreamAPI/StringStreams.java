@@ -178,6 +178,13 @@ public class StringStreams {
                 .collect(Collectors.toList());
     }
 
+    // SORT ARRAY BASED ON THE LAST LETTER OF EACH STRING
+    public static void lastLetterSort(List<String> strings) {
+        List<String> result = strings.stream()
+                .sorted(Comparator.comparing(e -> e.charAt(e.length() - 1)))
+                .collect(Collectors.toList());
+    }
+
     // SORT NAMES BASED ON LAST NAME
     public static void lastNameSort(List<String> names) {
 
