@@ -212,4 +212,44 @@ public class StringStreams {
 
         map.forEach((length, groupList) -> System.out.println(length + " -> " + groupList));
     }
+
+    // STRING REVERSAL
+    public static String stringReversal(String str) {
+        return str.chars().mapToObj(c -> (char) c)
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> {
+                            Collections.reverse(list);
+                            return list.stream()
+                                    .map(String::valueOf)
+                                    .collect(Collectors.joining());
+                        }));
+    }
+
+    // REVERSE ONLY THE STRING EXCEPT THE SPECIAL CHARACTERS
+    public static void reverseStringExceptSpecial(String str) {
+        List<Character> reversed = str.chars().mapToObj(c -> (char) c)
+                .filter(Character::isLetterOrDigit)
+                .collect(Collectors.collectingAndThen(Collectors.toList(),
+                        list -> {
+                            Collections.reverse(list);
+                            return list;
+                        }));
+
+        StringBuilder result = new StringBuilder();
+
+        Iterator<Character> it = reversed.iterator();
+
+        str.chars()
+                .mapToObj(c -> (char) c)
+                .forEach(ch -> {
+                    if (Character.isLetterOrDigit(ch)) {
+                        result.append(it.next());
+                    } else {
+                        result.append(ch);
+                    }
+                });
+
+        System.out.println(result);
+    }
 }
