@@ -252,4 +252,14 @@ public class StringStreams {
 
         System.out.println(result);
     }
+
+    public static List<List<String>> groupAnagrams(List<String> list) {
+        return new ArrayList<>(
+                list.stream()
+                        .collect(Collectors.groupingBy(word -> {
+                            char[] c = word.toCharArray();
+                            Arrays.sort(c);
+                            return new String(c);
+                        })).values());
+    }
 }
