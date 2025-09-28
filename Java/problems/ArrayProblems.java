@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class ArrayProblems {
 
     public static void main(String[] args) {
-        int[] a = { 3, 9, 2, 3, 1, 7, 2, 3, 5 };
+        int[] a = { 3, 9, 9, 2, 3, 1, 7, 2, 3, 5 };
         int[] nums = { 1, 2, 3, 4, 5, 6, 7 };
         int k = 3;
         // System.out.println(Arrays.toString(removeAllOccurrencesOfAnElementInAnArray(a,
@@ -19,7 +19,8 @@ public class ArrayProblems {
 
         int[] arr1 = { 1, 2, 3, 4, 5 };
         int[] arr2 = { 3, 4, 6, 7, 9, 11 };
-        listDifference(arr1, arr2);
+        // listDifference(arr1, arr2);
+        System.out.println(secondLargestElementInAnArray2(a));
     }
 
     /* REMOVE ALL OCCURENCES OF AN ELEMENT IN AN ARRAY */
@@ -51,6 +52,31 @@ public class ArrayProblems {
         }
 
         return max2;
+    }
+
+    /* SECOND LARGEST ELEMENT IN AN ARRAY WHEN THERE ARE DUPLICATES */
+    public static int secondLargestElementInAnArray2(int[] arr) {
+        if (arr.length < 2) {
+            throw new IllegalArgumentException("Array length must be greater than 2");
+        }
+
+        Integer first = null, second = null;
+
+        for (int num : arr) {
+            if (first == null || num > first) {
+                second = first;
+                first = num;
+            } else if (num != first && (second == null || num > second)) {
+                second = num;
+            }
+        }
+
+        if (second == null) {
+            throw new IllegalArgumentException("No second largest element found, all elements are equal");
+        }
+
+        return second;
+
     }
 
     /* SECOND LARGEST ELEMENT IN AN ARRAY USING STREAMS */
